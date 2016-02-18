@@ -28,13 +28,16 @@ CircularBuffer::~CircularBuffer(){
 }
 
 char CircularBuffer::pop(){
-  char c = *read; 
-  if(read == buf + size - 1) // hits the end of the array
-    read = buf; //wrap around
-  else
-    read++;
-  count--;  
-  return c;
+  if( count > 0){
+    char c = *read; 
+    if(read == buf + size - 1) // hits the end of the array
+      read = buf; //wrap around
+    else
+      read++;
+    count--;  
+    return c;
+  }
+  return 0;
 }
 
 CircularBuffer& CircularBuffer::push(char c){
